@@ -1,621 +1,421 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full bg-slate-50">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PSWDO Sorsogon - Inventory Management System</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Google Fonts Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        pswdo: {
-                            50: '#f0f4ff',
-                            100: '#e0e7ff',
-                            500: '#1d4ed8',
-                            600: '#1e40af',
-                            700: '#1e3a8a',
-                            800: '#172554',
-                            900: '#0f172a',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: #f1f5f9;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 4px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PSWDO Sorsogon - Inventory Management System</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+    .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: #f1f1f1; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+  </style>
 </head>
-<body class="h-full font-sans text-slate-800 antialiased bg-slate-100 overflow-x-hidden">
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col">
 
-    <!-- ========================================== -->
-    <!-- VIEW 1: FULL-PAGE SPLIT-SCREEN LOGIN SCREEN -->
-    <!-- ========================================== -->
-    <div id="auth-screen" class="min-h-screen w-full flex flex-col md:flex-row bg-white">
-        
-        <!-- LEFT HALF: BRANDING & LOGO SHOWCASE SECTION -->
-          <div class="w-full md:w-1/2 bg-gradient-to-br from-blue-900 via-indigo-900 to-blue-950 text-white p-8 md:p-12 flex flex-col justify-between relative overflow-hidden select-none cursor-default">
-            <!-- Background Decorative Geometric Blobs -->
-            <div class="absolute -top-24 -left-24 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl pointer-events-none"></div>
-            <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-indigo-500/20 rounded-full blur-3xl pointer-events-none"></div>
+  <!-- LOGIN SCREEN (Full Screen Split View) -->
+  <div id="login-screen" class="fixed inset-0 z-50 flex flex-col md:flex-row bg-white">
+    
+    <!-- Left Branding Panel (50% Width, No Text Selection / No Caret Cursor) -->
+    <div class="w-full md:w-1/2 bg-gradient-to-br from-blue-900 via-indigo-900 to-blue-950 text-white p-8 md:p-12 flex flex-col justify-between relative overflow-hidden select-none cursor-default">
+      <!-- Background Decorative Elements -->
+      <div class="absolute -top-24 -left-24 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-indigo-500/20 rounded-full blur-3xl pointer-events-none"></div>
 
-            <!-- Top Header Badge -->
-            <div class="relative z-10 flex items-center gap-3">
-                <div class="px-3 py-1 bg-white/10 backdrop-blur-md rounded-full border border-white/20 text-xs font-semibold tracking-wide uppercase text-blue-200">
-                    Provincial Social Welfare & Development Office
-                </div>
-            </div>
-
-            <!-- Middle Main Logos & Title -->
-            <div class="relative z-10 my-12 md:my-auto max-w-md">
-                
-                <!-- SIDE-BY-SIDE DUAL OFFICIAL LOGOS -->
-                <div class="mb-8 flex items-center gap-4">
-                    <!-- Province of Sorsogon Logo -->
-                  <div class="w-50 h-50 sm:w-60 sm:h-60 bg-transparent rounded-xl p-2 shadow-lg border border-slate-0 flex items-center justify-center shrink-0">
-                      <img src="./Sorsogon_Provincial_Seal.png" alt="Province of Sorsogon Seal" class="w-full h-full object-contain">
-                  </div>
-                   
-
-                    <!-- Divider -->
-                    <div class="h-12 w-px bg-white/20"></div>
-
-                    <!-- PSWDO Logo -->
-                      <div class="w-50 h-50 sm:w-60 sm:h-60 bg-transparent rounded-xl p-2 shadow-lg border border-slate-0 flex items-center justify-center shrink-0">
-                        <img src="./download.png" alt="PSWDO Sorsogon Seal" class="w-full h-full object-contain">
-                      </div>
-                    
-                </div>
-                
-                <h1 class="text-3xl lg:text-4xl font-extrabold tracking-tight leading-tight text-white">
-                    PSWDO Sorsogon
-                </h1>
-                <p class="text-xl text-blue-200 font-medium mt-1">
-                    Supply Inventory Management System
-                </p>
-                
-                <p class="mt-4 text-sm text-slate-300 leading-relaxed">
-                    Streamlined tracking of office supplies, relief assets, and equipment distributions for the Province of Sorsogon.
-                </p>
-
-                
-            </div>
-
-            <!-- Footer info -->
-            <div class="relative z-10 text-xs text-slate-400 pt-6">
-                &copy; Provincial Government of Sorsogon &bull; Authorized Personnel Access Only
-            </div>
+      <!-- Top Header Branding -->
+      <div class="relative z-10">
+        <!-- Dual Logos Container (Transparent & Borderless) -->
+        <div class="flex items-center gap-5 mb-8">
+          <img src="./sorsogon-logo.png" alt="Province of Sorsogon Seal" class="w-20 h-20 sm:w-24 sm:h-24 object-contain drop-shadow-md shrink-0 pointer-events-none">
+          <img src="./pswdo-logo.png" alt="PSWDO Sorsogon Seal" class="w-20 h-20 sm:w-24 sm:h-24 object-contain drop-shadow-md shrink-0 pointer-events-none">
         </div>
 
-        <!-- RIGHT HALF: CRISP LOGIN FORM SECTION -->
-        <div class="md:w-1/2 bg-white p-8 lg:p-16 flex items-center justify-center">
-            <div class="w-full max-w-md space-y-8">
-                
-                <div>
-                    <h2 class="text-2xl font-extrabold text-slate-900 tracking-tight">Sign In to Your Account</h2>
-                    <p class="text-sm text-slate-500 mt-1">Enter your credentials to access the PSWDO inventory portal.</p>
-                </div>
+        <span class="inline-block px-3 py-1 bg-blue-500/30 text-blue-200 border border-blue-400/30 rounded-full text-xs font-semibold uppercase tracking-wider mb-4">Official Portal</span>
+        <h1 class="text-3xl lg:text-4xl font-extrabold tracking-tight leading-tight">Provincial Social Welfare & Development Office</h1>
+        <p class="text-blue-200 mt-2 text-sm lg:text-base font-light">Province of Sorsogon • Office Supply & Inventory Management System</p>
+      </div>
 
-                <!-- Error Alert Box -->
-                <div id="login-error" class="hidden p-3.5 bg-rose-50 border border-rose-200 rounded-xl flex items-center gap-3 text-xs text-rose-700">
-                    <i data-lucide="alert-circle" class="w-4 h-4 text-rose-600 flex-shrink-0"></i>
-                    <span id="login-error-msg">Invalid username or password.</span>
-                </div>
+      <!-- Center Feature List -->
+      <div class="my-8 relative z-10 hidden sm:block">
+        <ul class="space-y-4">
+          <li class="flex items-center gap-3 text-sm text-blue-100">
+            <span class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center shrink-0">
+              <i class="fa-solid fa-boxes-stacked text-blue-300"></i>
+            </span>
+            Real-time office supply tracking and stock monitoring
+          </li>
+          <li class="flex items-center gap-3 text-sm text-blue-100">
+            <span class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center shrink-0">
+              <i class="fa-solid fa-file-signature text-blue-300"></i>
+            </span>
+            Automated stock reduction and withdrawal logging
+          </li>
+          <li class="flex items-center gap-3 text-sm text-blue-100">
+            <span class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center shrink-0">
+              <i class="fa-solid fa-shield-halved text-blue-300"></i>
+            </span>
+            Role-based access control for authorized staff
+          </li>
+        </ul>
+      </div>
 
-                <!-- Login Form -->
-                <form id="form-login" onsubmit="handleLogin(event)" class="space-y-5">
-                    
-                    <!-- Username Field -->
-                    <div>
-                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Username</label>
-                        <div class="relative">
-                            <i data-lucide="user" class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
-                            <input type="text" id="login-username" required placeholder="Enter your username" class="w-full pl-10 pr-4 py-2.5 text-sm border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition">
-                        </div>
-                    </div>
-
-                    <!-- Password Field -->
-                    <div>
-                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Password</label>
-                        <div class="relative">
-                            <i data-lucide="lock" class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
-                            <input type="password" id="login-password" required placeholder="••••••••" class="w-full pl-10 pr-10 py-2.5 text-sm border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition">
-                            <button type="button" onclick="togglePasswordVisibility()" class="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600">
-                                <i id="eye-icon" data-lucide="eye" class="w-4 h-4"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Remember Me & Help -->
-                    <div class="flex items-center justify-between text-xs">
-                        <label class="flex items-center gap-2 text-slate-600 cursor-pointer">
-                            <input type="checkbox" id="remember-me" checked class="rounded border-slate-300 text-blue-600 focus:ring-blue-500">
-                            <span>Keep me logged in</span>
-                      
-                    </div>
-
-                    <!-- Submit Button -->
-                    <button type="submit" id="btn-login-submit" class="w-full py-3 px-4 bg-blue-700 hover:bg-blue-800 text-white font-semibold text-sm rounded-xl shadow-lg shadow-blue-700/30 transition flex items-center justify-center gap-2">
-                        <span>Sign In</span>
-                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                    </button>
-                </form>
-
-                
-
-            </div>
-        </div>
-
+      <!-- Footer Info -->
+      <div class="relative z-10 text-xs text-blue-300 border-t border-white/10 pt-4 flex justify-between items-center">
+        <span>© PSWDO Sorsogon</span>
+        <span>v2.5 Cloud Sync</span>
+      </div>
     </div>
 
-    <!-- ========================================== -->
-    <!-- VIEW 2: CORE INVENTORY SYSTEM MAIN APP     -->
-    <!-- ========================================== -->
-    <div id="main-app" class="hidden min-h-screen flex flex-col md:flex-row overflow-hidden">
+    <!-- Right Login Form Panel (50% Width) -->
+    <div class="w-full md:w-1/2 bg-white p-8 md:p-16 flex flex-col justify-center items-center">
+      <div class="w-full max-w-md">
         
-        <!-- Sidebar Navigation -->
-        <aside class="w-full md:w-64 bg-slate-900 text-slate-300 flex-shrink-0 flex flex-col justify-between border-r border-slate-800">
+        <div class="mb-8">
+          <h2 class="text-2xl font-bold text-slate-900 tracking-tight">Account Sign In</h2>
+          <p class="text-slate-500 text-sm mt-1">Please enter your authorized credentials to access the system.</p>
+        </div>
+
+        <!-- Alert Notification Box -->
+        <div id="login-alert" class="hidden mb-6 p-4 rounded-xl text-sm border flex items-center gap-3">
+          <i id="login-alert-icon" class="fa-solid"></i>
+          <span id="login-alert-msg"></span>
+        </div>
+
+        <!-- Login Form -->
+        <form id="form-login" onsubmit="handleLogin(event)" class="space-y-5">
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Username</label>
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                <i class="fa-solid fa-user"></i>
+              </span>
+              <input type="text" id="login-username" required placeholder="Enter username" 
+                class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition text-sm">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Password</label>
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                <i class="fa-solid fa-lock"></i>
+              </span>
+              <input type="password" id="login-password" required placeholder="••••••••" 
+                class="w-full pl-10 pr-10 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition text-sm">
+              <button type="button" onclick="togglePasswordVisibility()" class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600">
+                <i id="pass-toggle-icon" class="fa-solid fa-eye"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between text-sm">
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="checkbox" id="remember-me" class="w-4 h-4 text-blue-600 rounded border-slate-300 focus:ring-blue-500">
+              <span class="text-slate-600 text-xs">Remember my session</span>
+            </label>
+          </div>
+
+          <button type="submit" 
+            class="w-full py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl shadow-lg shadow-blue-600/30 transition duration-200 flex items-center justify-center gap-2 text-sm">
+            <span>Sign In to System</span>
+            <i class="fa-solid fa-arrow-right text-xs"></i>
+          </button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN INVENTORY APP SCREEN (Hidden by default until authenticated) -->
+  <div id="app-screen" class="hidden flex-col min-h-screen">
+    
+    <!-- Top Navigation Bar -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-30">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        
+        <div class="flex items-center gap-3">
+          <!-- Dual Transparent & Borderless Mini Logos -->
+          <div class="flex items-center gap-2 select-none">
+            <img src="./sorsogon-logo.png" alt="Province of Sorsogon Seal" class="w-8 h-8 object-contain pointer-events-none">
+            <img src="./pswdo-logo.png" alt="PSWDO Sorsogon Seal" class="w-8 h-8 object-contain pointer-events-none">
+          </div>
+          <div>
+            <h1 class="font-bold text-slate-900 leading-none text-base sm:text-lg">PSWDO Sorsogon</h1>
+            <p class="text-xs text-slate-500 font-medium">Inventory Management System</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <div class="flex items-center gap-3 pr-3 border-r border-slate-200">
+            <div id="user-avatar" class="w-9 h-9 rounded-full bg-blue-100 text-blue-700 font-bold flex items-center justify-center text-sm">
+              AD
+            </div>
+            <div class="hidden sm:block text-left">
+              <div id="user-display-name" class="text-sm font-semibold text-slate-800 leading-none">Admin User</div>
+              <div id="user-display-role" class="text-xs text-slate-500 capitalize">Administrator</div>
+            </div>
+          </div>
+          <button onclick="handleLogout()" class="text-slate-500 hover:text-red-600 p-2 rounded-lg hover:bg-red-50 transition text-sm flex items-center gap-1.5 font-medium">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span class="hidden sm:inline">Logout</span>
+          </button>
+        </div>
+
+      </div>
+    </header>
+
+    <!-- Navigation Tabs & Actions Toolbar -->
+    <div class="bg-white border-b border-slate-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4 py-3">
+        
+        <!-- View Switcher Tabs -->
+        <div class="flex items-center gap-2 bg-slate-100 p-1 rounded-xl">
+          <button id="tab-btn-inventory" onclick="switchTab('inventory')" class="px-4 py-2 rounded-lg text-sm font-semibold transition bg-white text-blue-700 shadow-sm">
+            <i class="fa-solid fa-boxes-stacked mr-2"></i>Inventory Items
+          </button>
+          <button id="tab-btn-logs" onclick="switchTab('logs')" class="px-4 py-2 rounded-lg text-sm font-medium transition text-slate-600 hover:text-slate-900">
+            <i class="fa-solid fa-clock-rotate-left mr-2"></i>Activity Log
+          </button>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex items-center gap-2">
+          <button onclick="loadDatabase()" title="Refresh from Database" class="px-3 py-2 border border-slate-300 hover:bg-slate-50 text-slate-700 rounded-lg text-sm font-medium transition flex items-center gap-2">
+            <i class="fa-solid fa-rotate text-blue-600"></i>
+            <span class="hidden sm:inline">Sync</span>
+          </button>
+          <button onclick="openModal('modal-add-item')" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-semibold transition shadow-sm flex items-center gap-2">
+            <i class="fa-solid fa-plus"></i>
+            <span>Add New Item</span>
+          </button>
+          <button onclick="exportToCSV()" class="px-3 py-2 border border-slate-300 hover:bg-slate-50 text-slate-700 rounded-lg text-sm font-medium transition flex items-center gap-2">
+            <i class="fa-solid fa-file-csv text-emerald-600"></i>
+            <span class="hidden sm:inline">Export CSV</span>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      
+      <!-- INVENTORY TAB CONTENT -->
+      <div id="tab-inventory" class="space-y-6">
+        
+        <!-- Dashboard Summary Stats Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
             <div>
-                <!-- Header Logo -->
-                <div class="h-16 flex items-center px-4 bg-slate-950/70 border-b border-slate-800/80 gap-3">
-                    <div class="flex items-center gap-1.5 flex-shrink-0">
-                        <div class="w-7 h-7 rounded-full bg-blue-600/30 p-0.5 border border-blue-400/30 flex items-center justify-center">
-                            <svg class="w-full h-full rounded-full" viewBox="0 0 500 500" fill="none">
-                                <circle cx="250" cy="250" r="240" fill="#0052cc"/>
-                                <text x="250" y="440" font-family="Times New Roman, serif" font-weight="bold" font-size="80" fill="#ffffff" text-anchor="middle">1894</text>
-                            </svg>
-                        </div>
-                        <div class="w-7 h-7 rounded-full bg-blue-600/30 p-0.5 border border-blue-400/30 flex items-center justify-center">
-                            <svg class="w-full h-full rounded-full" viewBox="0 0 500 500" fill="none">
-                                <circle cx="250" cy="250" r="240" fill="#0b5ed7"/>
-                                <text x="250" y="145" font-family="Arial, sans-serif" font-weight="900" font-size="80" fill="#ffeb3b" text-anchor="middle">PSWDO</text>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="min-w-0 flex-1">
-                        <h1 class="text-xs font-bold text-white tracking-wide leading-tight truncate">PSWDO Sorsogon</h1>
-                        <p class="text-[10px] text-slate-400 truncate">Inventory System</p>
-                    </div>
-                </div>
-
-                <!-- Navigation Tabs -->
-                <nav class="p-4 space-y-1">
-                    <button onclick="switchTab('dashboard')" id="nav-dashboard" class="nav-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all text-white bg-blue-600 shadow-md">
-                        <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
-                        <span>Dashboard</span>
-                    </button>
-                    <button onclick="switchTab('inventory')" id="nav-inventory" class="nav-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all text-slate-400 hover:text-slate-100 hover:bg-slate-800/60">
-                        <i data-lucide="package" class="w-4 h-4"></i>
-                        <span>Inventory Items</span>
-                        <span id="badge-total-items" class="ml-auto bg-slate-800 text-slate-300 text-xs px-2 py-0.5 rounded-full border border-slate-700">0</span>
-                    </button>
-                    <button onclick="switchTab('transactions')" id="nav-transactions" class="nav-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all text-slate-400 hover:text-slate-100 hover:bg-slate-800/60">
-                        <i data-lucide="history" class="w-4 h-4"></i>
-                        <span>Activity Log</span>
-                    </button>
-                    <button onclick="switchTab('analytics')" id="nav-analytics" class="nav-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all text-slate-400 hover:text-slate-100 hover:bg-slate-800/60">
-                        <i data-lucide="bar-chart-3" class="w-4 h-4"></i>
-                        <span>Reports</span>
-                    </button>
-                </nav>
+              <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Total Items</p>
+              <h3 id="stat-total-items" class="text-2xl font-bold text-slate-900 mt-1">0</h3>
             </div>
-
-            <!-- Quick Action & System Reset -->
-            <div class="p-4 border-t border-slate-800/80 space-y-2">
-                <button onclick="openAddItemModal()" class="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-medium text-xs py-2.5 px-4 rounded-xl shadow transition">
-                    <i data-lucide="plus-circle" class="w-4 h-4"></i>
-                    <span>Add New Supply</span>
-                </button>
-                <div class="pt-2 flex items-center justify-between text-[11px] text-slate-500 px-1">
-                    <span>PSWDO Office Data</span>
-                    <button onclick="resetSampleData()" class="text-[11px] text-slate-400 hover:text-rose-400 transition underline">Reset Demo</button>
-                </div>
+            <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl">
+              <i class="fa-solid fa-box-archive"></i>
             </div>
-        </aside>
+          </div>
 
-        <!-- Main Body -->
-        <main class="flex-1 flex flex-col h-full overflow-hidden">
-            
-            <!-- Top App Bar with User Profile & Logout -->
-            <header class="h-16 bg-white border-b border-slate-200 px-6 flex items-center justify-between flex-shrink-0 shadow-sm">
-                <div class="flex items-center gap-3">
-                    <h2 id="page-title" class="text-lg font-bold text-slate-800">Dashboard Overview</h2>
-                </div>
-                
-                <div class="flex items-center gap-3">
-                    <!-- Quick Actions -->
-                    <button onclick="openStockModal(null, 'add')" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-lg hover:bg-emerald-100 transition">
-                        <i data-lucide="arrow-down-left" class="w-3.5 h-3.5"></i>
-                        <span class="hidden sm:inline">+ Restock</span>
-                    </button>
-                    <button onclick="openStockModal(null, 'withdraw')" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200 rounded-lg hover:bg-amber-100 transition">
-                        <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
-                        <span class="hidden sm:inline">- Withdraw</span>
-                    </button>
-                    <button onclick="exportDataToCSV()" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-slate-700 bg-slate-100 border border-slate-300 rounded-lg hover:bg-slate-200 transition">
-                        <i data-lucide="download" class="w-3.5 h-3.5"></i>
-                        <span class="hidden sm:inline">CSV</span>
-                    </button>
-
-                    <div class="h-6 w-px bg-slate-200 mx-1"></div>
-
-                    <!-- User Profile & Logout -->
-                    <div class="flex items-center gap-2">
-                        <div class="w-8 h-8 rounded-full bg-blue-700 text-white font-bold text-xs flex items-center justify-center shadow-sm" id="user-avatar">
-                            A
-                        </div>
-                        <div class="hidden sm:block text-left leading-tight">
-                            <div id="user-display-name" class="text-xs font-bold text-slate-800">Administrator</div>
-                            <div id="user-role-badge" class="text-[10px] text-slate-500 uppercase font-semibold">PSWDO Staff</div>
-                        </div>
-                        <button onclick="handleLogout()" class="p-1.5 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition" title="Log Out">
-                            <i data-lucide="log-out" class="w-4 h-4"></i>
-                        </button>
-                    </div>
-                </div>
-            </header>
-
-            <!-- Dynamic Views Container -->
-            <div class="flex-1 overflow-y-auto p-6 custom-scrollbar" id="content-container">
-
-                <!-- TAB 1: DASHBOARD -->
-                <div id="view-dashboard" class="space-y-6">
-                    <!-- Stat Cards -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
-                            <div>
-                                <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Total Supply Items</p>
-                                <h3 id="stat-total-items" class="text-2xl font-extrabold text-slate-900 mt-1">0</h3>
-                                <p class="text-xs text-slate-500 mt-1"><span id="stat-total-units" class="font-semibold text-slate-700">0</span> units total</p>
-                            </div>
-                            <div class="p-3 bg-blue-50 text-blue-600 rounded-xl">
-                                <i data-lucide="layers" class="w-6 h-6"></i>
-                            </div>
-                        </div>
-
-                        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between cursor-pointer hover:border-amber-300 transition" onclick="filterLowStock()">
-                            <div>
-                                <p class="text-xs font-bold uppercase tracking-wider text-amber-600">Low Stock Alerts</p>
-                                <h3 id="stat-low-stock" class="text-2xl font-extrabold text-amber-600 mt-1">0</h3>
-                                <p class="text-xs text-amber-700/80 mt-1">Needs reorder</p>
-                            </div>
-                            <div class="p-3 bg-amber-50 text-amber-600 rounded-xl">
-                                <i data-lucide="alert-triangle" class="w-6 h-6"></i>
-                            </div>
-                        </div>
-
-                        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
-                            <div>
-                                <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Today's Withdrawals</p>
-                                <h3 id="stat-today-withdrawals" class="text-2xl font-extrabold text-slate-900 mt-1">0</h3>
-                                <p class="text-xs text-slate-500 mt-1">Units distributed today</p>
-                            </div>
-                            <div class="p-3 bg-purple-50 text-purple-600 rounded-xl">
-                                <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
-                            </div>
-                        </div>
-
-                        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
-                            <div>
-                                <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Categories</p>
-                                <h3 id="stat-categories" class="text-2xl font-extrabold text-slate-900 mt-1">0</h3>
-                                <p class="text-xs text-slate-500 mt-1">Supply groups</p>
-                            </div>
-                            <div class="p-3 bg-emerald-50 text-emerald-600 rounded-xl">
-                                <i data-lucide="tag" class="w-6 h-6"></i>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Low Stock Alert Banner -->
-                    <div id="low-stock-banner" class="bg-amber-50 border border-amber-200 rounded-2xl p-4 hidden">
-                        <div class="flex items-center justify-between mb-3">
-                            <div class="flex items-center gap-2">
-                                <i data-lucide="alert-circle" class="w-5 h-5 text-amber-600"></i>
-                                <h3 class="font-bold text-amber-900 text-sm">Low Stock Items Needing Immediate Reorder</h3>
-                            </div>
-                            <button onclick="switchTab('inventory')" class="text-xs font-bold text-amber-700 hover:text-amber-900 underline">View All &rarr;</button>
-                        </div>
-                        <div id="low-stock-pills" class="flex flex-wrap gap-2"></div>
-                    </div>
-
-                    <!-- Priority & Activity Grid -->
-                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                        
-                        <!-- Priority Items Table -->
-                        <div class="lg:col-span-2 bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden flex flex-col">
-                            <div class="p-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
-                                <h3 class="font-bold text-slate-800 text-xs uppercase tracking-wider flex items-center gap-2">
-                                    <i data-lucide="list" class="w-4 h-4 text-blue-600"></i>
-                                    Items Requiring Attention
-                                </h3>
-                                <button onclick="switchTab('inventory')" class="text-xs font-bold text-blue-600 hover:text-blue-800">
-                                    View Full Inventory &rarr;
-                                </button>
-                            </div>
-                            <div class="overflow-x-auto">
-                                <table class="w-full text-left text-xs">
-                                    <thead class="bg-slate-50 text-slate-500 uppercase font-semibold">
-                                        <tr>
-                                            <th class="py-3 px-4">Item Name</th>
-                                            <th class="py-3 px-4">Category</th>
-                                            <th class="py-3 px-4 text-center">Stock Level</th>
-                                            <th class="py-3 px-4 text-center">Status</th>
-                                            <th class="py-3 px-4 text-right">Quick Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="dashboard-priority-table" class="divide-y divide-slate-100"></tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                        <!-- Activity Log Widget -->
-                        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm flex flex-col">
-                            <div class="p-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
-                                <h3 class="font-bold text-slate-800 text-xs uppercase tracking-wider flex items-center gap-2">
-                                    <i data-lucide="clock" class="w-4 h-4 text-purple-600"></i>
-                                    Recent Inventory Activity
-                                </h3>
-                                <button onclick="switchTab('transactions')" class="text-xs font-bold text-blue-600 hover:text-blue-800">
-                                    Full Log &rarr;
-                                </button>
-                            </div>
-                            <div id="dashboard-activity-list" class="p-4 space-y-3 flex-1 overflow-y-auto max-h-[380px] custom-scrollbar text-xs"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- TAB 2: INVENTORY TABLE -->
-                <div id="view-inventory" class="hidden space-y-4">
-                    <!-- Filters -->
-                    <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row gap-3 items-center justify-between">
-                        <div class="relative w-full md:w-80">
-                            <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
-                            <input type="text" id="inventory-search" placeholder="Search item name or SKU..." oninput="renderInventoryTable()" class="w-full pl-10 pr-4 py-2 text-xs border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600">
-                        </div>
-
-                        <div class="flex items-center gap-3 w-full md:w-auto">
-                            <select id="category-filter" onchange="renderInventoryTable()" class="text-xs border border-slate-300 rounded-xl px-3 py-2 bg-white text-slate-700 font-medium">
-                                <option value="ALL">All Categories</option>
-                            </select>
-
-                            <select id="status-filter" onchange="renderInventoryTable()" class="text-xs border border-slate-300 rounded-xl px-3 py-2 bg-white text-slate-700 font-medium">
-                                <option value="ALL">All Stock Statuses</option>
-                                <option value="LOW">Low Stock Only</option>
-                                <option value="OUT">Out of Stock Only</option>
-                                <option value="HEALTHY">Healthy Stock</option>
-                            </select>
-
-                            <button onclick="clearInventoryFilters()" class="text-xs text-slate-500 hover:text-slate-800 px-2 py-1 underline whitespace-nowrap">Reset</button>
-                        </div>
-                    </div>
-
-                    <!-- Main Table -->
-                    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-                        <div class="overflow-x-auto">
-                            <table class="w-full text-left text-xs">
-                                <thead class="bg-slate-100/80 text-slate-600 uppercase font-bold border-b border-slate-200">
-                                    <tr>
-                                        <th class="py-3.5 px-4">Item Details</th>
-                                        <th class="py-3.5 px-4">Category</th>
-                                        <th class="py-3.5 px-4 text-center">Current Stock</th>
-                                        <th class="py-3.5 px-4 text-center">Min Threshold</th>
-                                        <th class="py-3.5 px-4 text-center">Status</th>
-                                        <th class="py-3.5 px-4 text-right">Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="inventory-table-body" class="divide-y divide-slate-100"></tbody>
-                            </table>
-                        </div>
-                        <div id="inventory-empty-state" class="hidden p-8 text-center text-slate-500">
-                            <i data-lucide="package-x" class="w-10 h-10 mx-auto text-slate-300 mb-2"></i>
-                            <p class="font-bold text-slate-700">No inventory items found</p>
-                            <p class="text-xs text-slate-400 mt-1">Try adjusting your filter search criteria.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- TAB 3: TRANSACTIONS / LOGS -->
-                <div id="view-transactions" class="hidden space-y-4">
-                    <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-col sm:flex-row justify-between items-center gap-3">
-                        <div class="relative w-full sm:w-80">
-                            <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
-                            <input type="text" id="log-search" placeholder="Search movement logs..." oninput="renderTransactionLogs()" class="w-full pl-10 pr-4 py-2 text-xs border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600">
-                        </div>
-                        <select id="log-type-filter" onchange="renderTransactionLogs()" class="text-xs border border-slate-300 rounded-xl px-3 py-2 bg-white text-slate-700 font-medium">
-                            <option value="ALL">All Movements (In & Out)</option>
-                            <option value="ADD">Restocks (+)</option>
-                            <option value="WITHDRAW">Withdrawals (-)</option>
-                        </select>
-                    </div>
-
-                    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-                        <div class="overflow-x-auto">
-                            <table class="w-full text-left text-xs">
-                                <thead class="bg-slate-100/80 text-slate-600 uppercase font-bold border-b border-slate-200">
-                                    <tr>
-                                        <th class="py-3.5 px-4">Date & Time</th>
-                                        <th class="py-3.5 px-4">Item Name</th>
-                                        <th class="py-3.5 px-4 text-center">Type</th>
-                                        <th class="py-3.5 px-4 text-center">Qty</th>
-                                        <th class="py-3.5 px-4">Requested By / Supplier</th>
-                                        <th class="py-3.5 px-4">Notes / Purpose</th>
-                                        <th class="py-3.5 px-4 text-right">Resulting Balance</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="transaction-logs-body" class="divide-y divide-slate-100"></tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- TAB 4: REPORTS / ANALYTICS -->
-                <div id="view-analytics" class="hidden space-y-6">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
-                            <h3 class="font-bold text-slate-800 text-xs uppercase tracking-wider mb-4 flex items-center gap-2">
-                                <i data-lucide="pie-chart" class="w-4 h-4 text-blue-600"></i>
-                                Stock Distribution by Category
-                            </h3>
-                            <div class="h-64 flex items-center justify-center">
-                                <canvas id="chart-category-dist"></canvas>
-                            </div>
-                        </div>
-                        
-                        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
-                            <h3 class="font-bold text-slate-800 text-xs uppercase tracking-wider mb-4 flex items-center gap-2">
-                                <i data-lucide="bar-chart-2" class="w-4 h-4 text-purple-600"></i>
-                                Top 5 Distributed Office Items
-                            </h3>
-                            <div class="h-64 flex items-center justify-center">
-                                <canvas id="chart-top-withdrawn"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+          <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
+            <div>
+              <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Total Quantity</p>
+              <h3 id="stat-total-qty" class="text-2xl font-bold text-slate-900 mt-1">0</h3>
             </div>
-        </main>
-    </div>
-
-    <!-- MODAL 1: ADD/EDIT ITEM MODAL -->
-    <div id="modal-item" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
-        <div class="bg-white rounded-2xl max-w-md w-full shadow-2xl border border-slate-100 overflow-hidden">
-            <div class="px-6 py-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
-                <h3 id="modal-item-title" class="font-bold text-slate-800 text-sm">Add New Office Supply</h3>
-                <button onclick="closeModal('modal-item')" class="text-slate-400 hover:text-slate-600">
-                    <i data-lucide="x" class="w-5 h-5"></i>
-                </button>
+            <div class="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-xl">
+              <i class="fa-solid fa-cubes"></i>
             </div>
-            <form id="form-item" onsubmit="handleItemFormSubmit(event)" class="p-6 space-y-4">
-                <input type="hidden" id="item-id">
-                
-                <div>
-                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Item Name <span class="text-rose-500">*</span></label>
-                    <input type="text" id="item-name" required placeholder="e.g. A4 Copy Paper 80gsm" class="w-full px-3.5 py-2 border border-slate-300 rounded-xl text-xs focus:ring-2 focus:ring-blue-600 focus:outline-none">
-                </div>
+          </div>
 
-                <div class="grid grid-cols-2 gap-3">
-                    <div>
-                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Category <span class="text-rose-500">*</span></label>
-                        <input type="text" id="item-category" required placeholder="Paper Products" list="category-suggestions" class="w-full px-3.5 py-2 border border-slate-300 rounded-xl text-xs focus:ring-2 focus:ring-blue-600 focus:outline-none">
-                        <datalist id="category-suggestions">
-                            <option value="Paper & Printing"></option>
-                            <option value="Writing & Office Supplies"></option>
-                            <option value="IT & Printer Ink"></option>
-                            <option value="Relief Goods & Supplies"></option>
-                            <option value="Cleaning & Sanitation"></option>
-                        </datalist>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">SKU / Item Code</label>
-                        <input type="text" id="item-sku" placeholder="PSWDO-PAP-01" class="w-full px-3.5 py-2 border border-slate-300 rounded-xl text-xs focus:ring-2 focus:ring-blue-600 focus:outline-none">
-                    </div>
-                </div>
+          <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
+            <div>
+              <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Low Stock Alerts</p>
+              <h3 id="stat-low-stock" class="text-2xl font-bold text-amber-600 mt-1">0</h3>
+            </div>
+            <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-xl">
+              <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+          </div>
 
-                <div class="grid grid-cols-3 gap-3">
-                    <div>
-                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Initial Qty</label>
-                        <input type="number" id="item-stock" min="0" value="0" class="w-full px-3.5 py-2 border border-slate-300 rounded-xl text-xs focus:ring-2 focus:ring-blue-600 focus:outline-none">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Min Threshold</label>
-                        <input type="number" id="item-min" min="0" value="5" class="w-full px-3.5 py-2 border border-slate-300 rounded-xl text-xs focus:ring-2 focus:ring-blue-600 focus:outline-none">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Unit</label>
-                        <input type="text" id="item-unit" placeholder="ream, box, pcs" value="pcs" class="w-full px-3.5 py-2 border border-slate-300 rounded-xl text-xs focus:ring-2 focus:ring-blue-600 focus:outline-none">
-                    </div>
-                </div>
-
-                <div class="pt-4 border-t border-slate-100 flex items-center justify-end gap-3">
-                    <button type="button" onclick="closeModal('modal-item')" class="px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-100 rounded-xl">Cancel</button>
-                    <button type="submit" class="px-4 py-2 text-xs font-semibold bg-blue-700 hover:bg-blue-800 text-white rounded-xl shadow">Save Item</button>
-                </div>
-            </form>
+          <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
+            <div>
+              <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Out of Stock</p>
+              <h3 id="stat-out-stock" class="text-2xl font-bold text-red-600 mt-1">0</h3>
+            </div>
+            <div class="w-12 h-12 rounded-xl bg-red-50 text-red-600 flex items-center justify-center text-xl">
+              <i class="fa-solid fa-circle-xmark"></i>
+            </div>
+          </div>
         </div>
-    </div>
 
-    <!-- MODAL 2: STOCK MOVEMENT (RESTOCK / WITHDRAW) -->
-    <div id="modal-stock" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
-        <div class="bg-white rounded-2xl max-w-md w-full shadow-2xl border border-slate-100 overflow-hidden">
-            <div id="stock-modal-header" class="px-6 py-4 border-b border-slate-200 flex items-center justify-between bg-slate-50">
-                <h3 id="modal-stock-title" class="font-bold text-slate-800 text-sm">Stock Movement</h3>
-                <button onclick="closeModal('modal-stock')" class="text-slate-400 hover:text-slate-600">
-                    <i data-lucide="x" class="w-5 h-5"></i>
-                </button>
-            </div>
-            <form id="form-stock" onsubmit="handleStockSubmit(event)" class="p-6 space-y-4">
-                <input type="hidden" id="stock-action-type" value="add">
-                
-                <div>
-                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Select Supply Item <span class="text-rose-500">*</span></label>
-                    <select id="stock-item-id" onchange="updateStockModalInfo()" required class="w-full px-3 py-2 border border-slate-300 rounded-xl text-xs focus:ring-2 focus:ring-blue-600 focus:outline-none"></select>
-                </div>
+        <!-- Search and Filter Bar -->
+        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div class="relative w-full sm:w-96">
+            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </span>
+            <input type="text" id="search-input" oninput="renderInventoryTable()" placeholder="Search item name, code, or details..." 
+              class="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-600">
+          </div>
 
-                <div id="stock-current-info" class="p-3 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-between text-xs">
-                    <span class="text-slate-600 font-medium">Available Balance:</span>
-                    <span id="stock-current-val" class="font-extrabold text-slate-900">0 pcs</span>
-                </div>
-
-                <div>
-                    <label id="label-stock-qty" class="block text-xs font-bold text-slate-700 uppercase mb-1">Quantity <span class="text-rose-500">*</span></label>
-                    <input type="number" id="stock-qty" min="1" value="1" required class="w-full px-3.5 py-2 border border-slate-300 rounded-xl text-xs font-bold focus:ring-2 focus:ring-blue-600 focus:outline-none">
-                </div>
-
-                <div>
-                    <label id="label-stock-person" class="block text-xs font-bold text-slate-700 uppercase mb-1">Requested By / Department / Supplier</label>
-                    <input type="text" id="stock-person" placeholder="e.g. Social Services Section / Supplies Officer" class="w-full px-3.5 py-2 border border-slate-300 rounded-xl text-xs focus:ring-2 focus:ring-blue-600 focus:outline-none">
-                </div>
-
-                <div>
-                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Purpose / Notes</label>
-                    <textarea id="stock-notes" rows="2" placeholder="e.g. Distribution for monthly administrative reports" class="w-full px-3.5 py-2 border border-slate-300 rounded-xl text-xs focus:ring-2 focus:ring-blue-600 focus:outline-none"></textarea>
-                </div>
-
-                <div class="pt-4 border-t border-slate-100 flex items-center justify-end gap-3">
-                    <button type="button" onclick="closeModal('modal-stock')" class="px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-100 rounded-xl">Cancel</button>
-                    <button id="btn-submit-stock" type="submit" class="px-4 py-2 text-xs font-semibold text-white rounded-xl shadow bg-emerald-600 hover:bg-emerald-500">Confirm</button>
-                </div>
-            </form>
+          <div class="flex items-center gap-3 w-full sm:w-auto">
+            <select id="filter-category" onchange="renderInventoryTable()" class="px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-600">
+              <option value="ALL">All Categories</option>
+              <option value="Office Supplies">Office Supplies</option>
+              <option value="Paper Products">Paper Products</option>
+              <option value="Writing Instruments">Writing Instruments</option>
+              <option value="Equipment & IT">Equipment & IT</option>
+              <option value="Relief Goods">Relief Goods</option>
+            </select>
+          </div>
         </div>
-    </div>
 
-    <!-- NOTIFICATION TOAST -->
-    <div id="toast" class="fixed bottom-5 right-5 z-50 flex items-center gap-3 px-4 py-3 rounded-2xl shadow-xl text-white text-xs font-semibold transform transition-all duration-300 translate-y-20 opacity-0 bg-slate-900 border border-slate-800">
-        <i id="toast-icon" data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i>
-        <span id="toast-msg">Action completed</span>
-    </div>
+        <!-- Inventory Data Table -->
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+          <div class="overflow-x-auto custom-scrollbar">
+            <table class="w-full text-left text-sm border-collapse">
+              <thead>
+                <tr class="bg-slate-50 border-b border-slate-200 text-slate-600 uppercase text-xs tracking-wider">
+                  <th class="py-3.5 px-4 font-semibold">Item Code / Name</th>
+                  <th class="py-3.5 px-4 font-semibold">Category</th>
+                  <th class="py-3.5 px-4 font-semibold">Current Stock</th>
+                  <th class="py-3.5 px-4 font-semibold">Status</th>
+                  <th class="py-3.5 px-4 font-semibold text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="inventory-table-body" class="divide-y divide-slate-100">
+                <!-- Dynamically populated via JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
 
-    <!-- JAVASCRIPT LOGIC -->
-   <script>
+      </div>
+
+      <!-- ACTIVITY LOGS TAB CONTENT -->
+      <div id="tab-logs" class="hidden space-y-4">
+        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
+          <h2 class="text-base font-bold text-slate-800">Transaction & Audit History</h2>
+          <button onclick="clearLogs()" class="text-xs text-red-600 hover:text-red-800 font-semibold">Clear Logs</button>
+        </div>
+
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+          <div class="overflow-x-auto custom-scrollbar">
+            <table class="w-full text-left text-sm border-collapse">
+              <thead>
+                <tr class="bg-slate-50 border-b border-slate-200 text-slate-600 uppercase text-xs tracking-wider">
+                  <th class="py-3.5 px-4 font-semibold">Date & Time</th>
+                  <th class="py-3.5 px-4 font-semibold">Action</th>
+                  <th class="py-3.5 px-4 font-semibold">Item Name</th>
+                  <th class="py-3.5 px-4 font-semibold">Quantity</th>
+                  <th class="py-3.5 px-4 font-semibold">Recipient / Notes</th>
+                  <th class="py-3.5 px-4 font-semibold">User</th>
+                </tr>
+              </thead>
+              <tbody id="logs-table-body" class="divide-y divide-slate-100">
+                <!-- Dynamically populated via JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- MODAL: ADD NEW ITEM -->
+  <div id="modal-add-item" class="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-100">
+      <div class="flex justify-between items-center mb-4 pb-3 border-b border-slate-100">
+        <h3 class="text-lg font-bold text-slate-900">Add New Inventory Item</h3>
+        <button onclick="closeModal('modal-add-item')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+      </div>
+      <form onsubmit="handleAddItem(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Item Code</label>
+          <input type="text" id="add-sku" required placeholder="e.g. ITM-001" class="w-full px-3 py-2 border rounded-lg text-sm">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Item Description / Title</label>
+          <input type="text" id="add-name" required placeholder="e.g. A4 Copy Paper 70gsm" class="w-full px-3 py-2 border rounded-lg text-sm">
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Category</label>
+            <select id="add-category" class="w-full px-3 py-2 border rounded-lg text-sm">
+              <option value="Office Supplies">Office Supplies</option>
+              <option value="Paper Products">Paper Products</option>
+              <option value="Writing Instruments">Writing Instruments</option>
+              <option value="Equipment & IT">Equipment & IT</option>
+              <option value="Relief Goods">Relief Goods</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Unit</label>
+            <input type="text" id="add-unit" required placeholder="reams, boxes, pcs" class="w-full px-3 py-2 border rounded-lg text-sm">
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Initial Quantity</label>
+            <input type="number" id="add-qty" min="0" required value="10" class="w-full px-3 py-2 border rounded-lg text-sm">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Min. Alert Level</label>
+            <input type="number" id="add-min" min="1" required value="5" class="w-full px-3 py-2 border rounded-lg text-sm">
+          </div>
+        </div>
+        <div class="flex justify-end gap-2 pt-4">
+          <button type="button" onclick="closeModal('modal-add-item')" class="px-4 py-2 border text-slate-600 rounded-lg text-sm">Cancel</button>
+          <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold">Save Item</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: STOCK ADJUSTMENT (ADD / REDUCE) -->
+  <div id="modal-adjust-stock" class="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-100">
+      <div class="flex justify-between items-center mb-4 pb-3 border-b border-slate-100">
+        <h3 id="adjust-modal-title" class="text-lg font-bold text-slate-900">Stock Adjustment</h3>
+        <button onclick="closeModal('modal-adjust-stock')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+      </div>
+      <form onsubmit="handleStockAdjustment(event)" class="space-y-4">
+        <input type="hidden" id="adjust-item-id">
+        <input type="hidden" id="adjust-action-type">
+
+        <div class="bg-slate-50 p-3 rounded-lg border">
+          <div id="adjust-item-name" class="font-bold text-slate-800 text-sm">Item Name</div>
+          <div class="text-xs text-slate-500 mt-1 flex justify-between">
+            <span>Current Stock: <strong id="adjust-current-qty" class="text-slate-800">0</strong></span>
+            <span id="adjust-unit-display">pcs</span>
+          </div>
+        </div>
+
+        <div>
+          <label id="adjust-qty-label" class="block text-xs font-semibold text-slate-700 uppercase mb-1">Quantity</label>
+          <input type="number" id="adjust-qty" min="1" required value="1" class="w-full px-3 py-2 border rounded-lg text-sm">
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Recipient / Purpose / Remarks</label>
+          <input type="text" id="adjust-notes" placeholder="e.g. Issued to Admin Division / Restock from Supplier" class="w-full px-3 py-2 border rounded-lg text-sm">
+        </div>
+
+        <div class="flex justify-end gap-2 pt-4">
+          <button type="button" onclick="closeModal('modal-adjust-stock')" class="px-4 py-2 border text-slate-600 rounded-lg text-sm">Cancel</button>
+          <button id="adjust-submit-btn" type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold">Confirm Adjustment</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT APPLICATION LOGIC -->
+  <script>
     // PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL BELOW:
-    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyJCwaMM3UmrKoGJbR-tVzpXJF8_THfCk0QIdfVFWi7x31RT5f8ODKkEk38EA2vPAw6iQ/exec";
+    const GOOGLE_SCRIPT_URL = "PASTE_YOUR_WEB_APP_URL_HERE";
 
     let currentUser = null;
     let items = [];
@@ -624,8 +424,12 @@
     document.addEventListener('DOMContentLoaded', () => {
       const savedUser = localStorage.getItem('pswdo_user_session');
       if (savedUser) {
-        currentUser = JSON.parse(savedUser);
-        showAppScreen();
+        try {
+          currentUser = JSON.parse(savedUser);
+          showAppScreen();
+        } catch (e) {
+          localStorage.removeItem('pswdo_user_session');
+        }
       }
     });
 
@@ -694,6 +498,12 @@
     // --- LOAD LIVE DATA FROM GOOGLE SHEETS ---
     async function loadDatabase() {
       const tbody = document.getElementById('inventory-table-body');
+      
+      if (!GOOGLE_SCRIPT_URL || !GOOGLE_SCRIPT_URL.startsWith('http')) {
+        tbody.innerHTML = `<tr><td colspan="5" class="py-8 text-center text-amber-600 font-medium">Database URL not set yet. Paste your Google Apps Script Web App URL into GOOGLE_SCRIPT_URL in index.html.</td></tr>`;
+        return;
+      }
+
       tbody.innerHTML = `<tr><td colspan="5" class="py-8 text-center text-blue-600 font-medium"><i class="fa-solid fa-spinner fa-spin mr-2"></i>Syncing live inventory from database...</td></tr>`;
       try {
         const res = await fetch(GOOGLE_SCRIPT_URL);
@@ -706,11 +516,12 @@
           updateStats();
         }
       } catch (err) {
-        tbody.innerHTML = `<tr><td colspan="5" class="py-8 text-center text-red-600">Failed to connect to database. Check your Google Script URL.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="5" class="py-8 text-center text-red-600">Failed to connect to database. Make sure your Apps Script is deployed with access set to "Anyone".</td></tr>`;
       }
     }
 
     async function syncToDatabase(payload) {
+      if (!GOOGLE_SCRIPT_URL || !GOOGLE_SCRIPT_URL.startsWith('http')) return;
       await fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
@@ -952,5 +763,5 @@
     function openModal(id) { document.getElementById(id).classList.remove('hidden'); document.getElementById(id).classList.add('flex'); }
     function closeModal(id) { document.getElementById(id).classList.add('hidden'); document.getElementById(id).classList.remove('flex'); }
   </script>
-    </body>
+</body>
 </html>
